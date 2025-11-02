@@ -1,12 +1,6 @@
 # Get the directory where this script is located
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-echo -e "\n Initializing Kubernetes cluster...\n"
-minikube start --cpus 2 --memory 4g --driver docker --profile crewcash
-
-echo -e "\n Enabling NGINX Ingress Controller...\n"
-minikube addons enable ingress --profile crewcash
-
 "$SCRIPT_DIR/ingress-nginx/deploy.sh"
 "$SCRIPT_DIR/redis/deploy.sh"
 "$SCRIPT_DIR/postgres/deploy.sh"
