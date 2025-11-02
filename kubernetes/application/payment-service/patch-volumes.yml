@@ -17,7 +17,7 @@ spec:
       volumes:
         - name: postgres-credentials-volume
           secret:
-            secretName: crewcash-postgres-order-credentials
+            secretName: crewcash-postgres-payment-credentials
         - name: rabbitmq-credentials-volume
           secret:
             secretName: crewcash-rabbitmq-credentials
