@@ -1,24 +1,34 @@
-echo "\n Deploying PostgreSQL..."
+#!/bin/sh
+
+set -euo pipefail
+
+# Change to the script's directory
+cd "$(dirname "$0")"
+
+# Set the namespace for secrets
+NAMESPACE="default"
+
+echo -e "\n Deploying PostgreSQL..."
 
 kubectl apply -f resources/postgresql.yml
 
 sleep 5
 
-echo "\n Waiting for PostgreSQL to be deployed..."
+echo -e "\n Waiting for PostgreSQL to be deployed..."
 
 while [ $(kubectl get pod -l db=crewcash-postgres | wc -l) -eq 0 ] ; do
   sleep 5
 done
 
-echo "\n Waiting for PostgreSQL to be ready..."
+echo -e "\n Waiting for PostgreSQL to be ready..."
 
 kubectl wait \
   --for=condition=ready pod \
   --selector=db=crewcash-postgres \
   --timeout=180s
 
-echo "\n PostgreSQL has been successfully deployed."
-echo "\n Generating Secrets with PostgreSQL credentials."
+echo -e "\n PostgreSQL has been successfully deployed."
+echo -e "\n Generating Secrets with PostgreSQL credentials."
 
 kubectl -n "$NAMESPACE" delete secret crewcash-postgres-wallet-credentials --ignore-not-found=true
 kubectl -n "$NAMESPACE" create secret generic crewcash-postgres-wallet-credentials \

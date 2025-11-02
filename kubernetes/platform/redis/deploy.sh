@@ -1,24 +1,34 @@
-echo "\n Deploying Redis..."
+#!/bin/sh
 
-kubectl apply -f services/redis.yml
+set -euo pipefail
+
+# Change to the script's directory
+cd "$(dirname "$0")"
+
+# Set the namespace for secrets
+NAMESPACE="default"
+
+echo -e "\n Deploying Redis..."
+
+kubectl apply -f resources/redis.yml
 
 sleep 5
 
-echo "\n Waiting for Redis to be deployed..."
+echo -e "\n Waiting for Redis to be deployed..."
 
 while [ $(kubectl get pod -l db=crewcash-redis | wc -l) -eq 0 ] ; do
   sleep 5
 done
 
-echo "\n Waiting for Redis to be ready..."
+echo -e "\n Waiting for Redis to be ready..."
 
 kubectl wait \
   --for=condition=ready pod \
   --selector=db=crewcash-redis \
   --timeout=180s
 
-echo "\n Redis has been successfully deployed."
-echo "\n Generating Secret with Redis credentials."
+echo -e "\n Redis has been successfully deployed."
+echo -e "\n Generating Secret with Redis credentials."
 
 kubectl -n "$NAMESPACE" delete secret crewcash-redis-credentials --ignore-not-found=true
 kubectl -n "$NAMESPACE" create secret generic crewcash-redis-credentials \

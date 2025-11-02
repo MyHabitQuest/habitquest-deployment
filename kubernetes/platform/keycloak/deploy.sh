@@ -2,7 +2,10 @@
 
 set -euo pipefail
 
-echo "\n Keycloak deployment started.\n"
+# Change to the script's directory
+cd "$(dirname "$0")"
+
+echo -e "\n Keycloak deployment started.\n"
 
 echo "Installing Keycloak..."
 
@@ -11,7 +14,7 @@ clientSecret=$(echo $ random | openssl md5 | head -c 20)
 kubectl apply -f resources/namespace.yml
 sed "s/crewcash-keycloak-secret/$clientSecret/" resources/keycloak-config.yml | kubectl apply -f -
 
-echo "\n Configuring Helm chart..."
+echo -e "\n Configuring Helm chart..."
 
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
@@ -19,7 +22,7 @@ helm upgrade --install crewcash-keycloak bitnami/keycloak \
   --values values.yml \
   --namespace keycloak-system --version 21.4.1
 
-echo "\n Waiting for Keycloak to be deployed..."
+echo -e "\n Waiting for Keycloak to be deployed..."
 
 sleep 15
 
@@ -27,7 +30,7 @@ while [ $(kubectl get pod -l app.kubernetes.io/component=keycloak -n keycloak-sy
   sleep 15
 done
 
-echo "\n Waiting for Keycloak to be ready..."
+echo -e "\n Waiting for Keycloak to be ready..."
 
 kubectl wait \
   --for=condition=ready pod \
@@ -35,20 +38,20 @@ kubectl wait \
   --timeout=600s \
   --namespace=keycloak-system
 
-echo "\n Keycloak cluster has been successfully deployed."
+echo -e "\n Keycloak cluster has been successfully deployed."
 
-echo "\n Your Keycloak Admin credentials...\n"
+echo -e "\n Your Keycloak Admin credentials...\n"
 
 echo "Admin Username: user"
 echo "Admin Password: $(kubectl get secret --namespace keycloak-system crewcash-keycloak -o jsonpath="{.data.admin-password}" | base64 --decode)"
 
-echo "\n Generating Secret with Keycloak client secret."
+echo -e "\n Generating Secret with Keycloak client secret."
 
 kubectl delete secret crewcash-keycloak-client-credentials || true
 
 kubectl create secret generic crewcash-keycloak-client-credentials \
     --from-literal=spring.security.oauth2.client.registration.keycloak.client-secret="$clientSecret"
 
-echo "\n A 'crewcash-keycloak-client-credentials' has been created for Spring Boot applications to interact with Keycloak."
+echo -e "\n A 'crewcash-keycloak-client-credentials' has been created for Spring Boot applications to interact with Keycloak."
 
-echo "\n️ Keycloak deployment completed.\n"
+echo -e "\n️ Keycloak deployment completed.\n"

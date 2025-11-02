@@ -1,4 +1,15 @@
-### configuring ArgoCD to manage the CrewCash applications
+#!/bin/sh
+
+set -euo pipefail
+
+echo -e "\nConfiguring ArgoCD to manage the CrewCash applications..."
+
+# Wait for the admin secret to be available
+echo -e "\nWaiting for ArgoCD initial admin secret..."
+while ! kubectl -n argocd get secret argocd-initial-admin-secret &> /dev/null; do
+  sleep 5
+done
+
 argocd_admin_password=$(kubectl -n argocd get secret argocd-initial-admin-secret \
  -o jsonpath="{.data.password}" | base64 -d; echo)
 

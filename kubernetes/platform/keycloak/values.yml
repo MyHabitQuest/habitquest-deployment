@@ -1,8 +1,8 @@
-fullnameOverride: polar-keycloak
+fullnameOverride: crewcash-keycloak
 commonAnnotations:
-  app: polar-keycloak
+  app: crewcash-keycloak
 image:
-  tag: 24.0.5
+  tag: 26.4
 extraEnvVars:
   - name: KEYCLOAK_EXTRA_ARGS
     value: "--import-realm"
@@ -32,3 +32,12 @@ resources:
 service:
   type: LoadBalancer
   port: 80
+postgresql:
+  enabled: true
+  image:
+    tag: 14.12
+  auth:
+    username: keycloak
+    password: keycloak
+    database: keycloak
+

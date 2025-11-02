@@ -2,19 +2,22 @@
 
 set -euo pipefail
 
-echo "\nRabbitMQ deployment started."
+# Change to the script's directory
+cd "$(dirname "$0")"
 
-echo "\nInstalling RabbitMQ Cluster Kubernetes Operator..."
+echo -e "\nRabbitMQ deployment started."
+
+echo -e "\nInstalling RabbitMQ Cluster Kubernetes Operator..."
 
 kubectl apply -f "https://github.com/rabbitmq/cluster-operator/releases/download/v2.9.0/cluster-operator.yml"
 
-echo "\nWaiting for RabbitMQ Operator to be deployed..."
+echo -e "\nWaiting for RabbitMQ Operator to be deployed..."
 
 while [ $(kubectl get pod -l app.kubernetes.io/name=rabbitmq-cluster-operator -n rabbitmq-system | wc -l) -eq 0 ] ; do
   sleep 15
 done
 
-echo "\nWaiting for RabbitMQ Operator to be ready..."
+echo -e "\nWaiting for RabbitMQ Operator to be ready..."
 
 kubectl wait \
   --for=condition=ready pod \
@@ -22,21 +25,21 @@ kubectl wait \
   --timeout=300s \
   --namespace=rabbitmq-system
 
-echo "\nThe RabbitMQ Cluster Kubernetes Operator has been successfully installed."
+echo -e "\nThe RabbitMQ Cluster Kubernetes Operator has been successfully installed."
 
-echo "\n-----------------------------------------------------"
+echo -e "\n-----------------------------------------------------"
 
-echo "\nDeploying RabbitMQ cluster..."
+echo -e "\nDeploying RabbitMQ cluster..."
 
 kubectl apply -f resources/cluster.yml
 
-echo "\nWaiting for RabbitMQ cluster to be deployed..."
+echo -e "\nWaiting for RabbitMQ cluster to be deployed..."
 
 while [ $(kubectl get pod -l app.kubernetes.io/name=crewcash-rabbitmq -n rabbitmq-system | wc -l) -eq 0 ] ; do
   sleep 15 
 done
 
-echo "\nWaiting for RabbitMQ cluster to be ready..."
+echo -e "\nWaiting for RabbitMQ cluster to be ready..."
 
 kubectl wait \
   --for=condition=ready pod \
@@ -44,9 +47,9 @@ kubectl wait \
   --timeout=600s \
   --namespace=rabbitmq-system
 
-echo "\nThe RabbitMQ cluster has been successfully deployed."
+echo -e "\nThe RabbitMQ cluster has been successfully deployed."
 
-echo "\n-----------------------------------------------------"
+echo -e "\n-----------------------------------------------------"
 
 export RABBITMQ_USERNAME=$(kubectl get secret crewcash-rabbitmq-default-user -o jsonpath='{.data.username}' -n=rabbitmq-system | base64 --decode)
 export RABBITMQ_PASSWORD=$(kubectl get secret crewcash-rabbitmq-default-user -o jsonpath='{.data.password}' -n=rabbitmq-system | base64 --decode)
@@ -54,7 +57,7 @@ export RABBITMQ_PASSWORD=$(kubectl get secret crewcash-rabbitmq-default-user -o 
 echo "Username: $RABBITMQ_USERNAME"
 echo "Password: $RABBITMQ_PASSWORD"
 
-echo "\nGenerating Secret with RabbitMQ credentials."
+echo -e "\nGenerating Secret with RabbitMQ credentials."
 
 kubectl delete secret crewcash-rabbitmq-credentials || true
 
@@ -67,6 +70,6 @@ kubectl create secret generic crewcash-rabbitmq-credentials \
 unset RABBITMQ_USERNAME
 unset RABBITMQ_PASSWORD
 
-echo "\nSecret 'crewcash-rabbitmq-credentials' has been created for Spring Boot applications to interact with RabbitMQ."
+echo -e "\nSecret 'crewcash-rabbitmq-credentials' has been created for Spring Boot applications to interact with RabbitMQ."
 
-echo "\nRabbitMQ deployment completed.\n"
+echo -e "\nRabbitMQ deployment completed.\n"
