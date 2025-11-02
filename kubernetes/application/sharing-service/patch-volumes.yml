@@ -15,7 +15,7 @@ spec:
       volumes:
         - name: postgres-credentials-volume
           secret:
-            secretName: polar-postgres-catalog-credentials
+            secretName: crewcash-postgres-catalog-credentials
         - name: keycloak-issuer-resourceserver-secret-volume
           secret:
             secretName: keycloak-issuer-resourceserver-secret

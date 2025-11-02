@@ -17,10 +17,10 @@ spec:
       volumes:
         - name: postgres-credentials-volume
           secret:
-            secretName: polar-postgres-order-credentials
+            secretName: crewcash-postgres-order-credentials
         - name: rabbitmq-credentials-volume
           secret:
-            secretName: polar-rabbitmq-credentials
+            secretName: crewcash-rabbitmq-credentials
         - name: keycloak-issuer-resourceserver-secret-volume
           secret:
             secretName: keycloak-issuer-resourceserver-secret
