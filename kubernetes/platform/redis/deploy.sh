@@ -24,3 +24,5 @@ kubectl -n "$NAMESPACE" delete secret crewcash-redis-credentials --ignore-not-fo
 kubectl -n "$NAMESPACE" create secret generic crewcash-redis-credentials \
   --from-literal=spring.redis.host=crewcash-redis \
   --from-literal=spring.redis.port=6379
+#  --from-literal=spring.redis.username=<redis_username> \
+# --from-literal=spring.redis.password=<redis_password> \
