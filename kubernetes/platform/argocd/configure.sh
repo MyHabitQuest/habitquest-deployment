@@ -62,7 +62,7 @@ argocd app create edge-service \
  --sync-policy auto \
  --auto-prune
 
-argocd app create budeget-service \
+argocd app create budget-service \
  --repo \
  https://github.com/CrewCash/crewcash-deployment.git \
  --path kubernetes/applications/budget-service/ \

@@ -26,3 +26,4 @@ kubectl wait \
   --namespace=argocd
 
 echo -e "\nArgoCD installation completed.\n"
+

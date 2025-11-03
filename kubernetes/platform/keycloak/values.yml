@@ -4,7 +4,7 @@ commonAnnotations:
 image:
   registry: public.ecr.aws
   repository: bitnami/keycloak
-  tag: 26.4.2
+  tag: 25.0.4
 extraEnvVars:
   - name: KEYCLOAK_EXTRA_ARGS
     value: "--import-realm"
