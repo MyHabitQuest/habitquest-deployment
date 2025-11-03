@@ -2,7 +2,9 @@ fullnameOverride: crewcash-keycloak
 commonAnnotations:
   app: crewcash-keycloak
 image:
-  tag: 26.4
+  registry: public.ecr.aws
+  repository: bitnami/keycloak
+  tag: 26.4.2
 extraEnvVars:
   - name: KEYCLOAK_EXTRA_ARGS
     value: "--import-realm"
@@ -21,7 +23,7 @@ extraVolumes:
     configMap:
       name: keycloak-config
 startupProbe:
-  enabled: true
+  enabled: false
 resources:
   requests:
     cpu: 0.2
@@ -35,9 +37,10 @@ service:
 postgresql:
   enabled: true
   image:
-    tag: 14.12
+    registry: public.ecr.aws
+    repository: bitnami/postgresql
+    tag: 18.0.0
   auth:
     username: keycloak
     password: keycloak
     database: keycloak
-
