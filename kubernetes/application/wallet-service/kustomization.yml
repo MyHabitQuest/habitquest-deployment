@@ -1,0 +1,25 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - github.com/crewcash/wallet-service/k8s?ref=main
+
+patchesStrategicMerge:
+  - patch-env.yml
+  - patch-resources.yml
+  - patch-volumes.yml
+
+configMapGenerator:
+  - behavior: merge
+    files:
+      - application.yml
+    name: wallet-config
+
+images:
+  - name: wallet-service
+    newName: ghcr.io/crewcash/wallet-service
+    newTag: latest
+
+replicas:
+  - count: 2
+    name: wallet-service
