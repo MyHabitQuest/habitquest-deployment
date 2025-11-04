@@ -11,23 +11,15 @@ if ! kubectl -n grafana get configmap grafana-dashboards >/dev/null 2>&1; then
     --from-file=spring-cloud-gateway.json=./resources/spring-cloud-gateway.json
 fi
 
-RELEASE_NAME="${RELEASE_NAME:-crewcash-grafana}"
-NAMESPACE="${NAMESPACE:-grafana}"
-CHART_REPO="${CHART_REPO:-https://grafana.github.io/helm-charts}"
-CHART_NAME="${CHART_NAME:-grafana/grafana}"
-VALUES_FILE="${VALUES_FILE:-resources/values.yml}"
-LOCAL_PORT="${LOCAL_PORT:-3000}"
-HELM_TIMEOUT="${HELM_TIMEOUT:-300s}"
-
 # create namespace
-if ! kubectl get ns "$NAMESPACE" >/dev/null 2>&1; then
-  kubectl create namespace "$NAMESPACE"
+if ! kubectl get ns grafana >/dev/null 2>&1; then
+  kubectl create namespace grafana
 fi
 
 # add/update repo
-helm repo add grafana "$CHART_REPO" 2>/dev/null || true
+helm repo add grafana "https://grafana.github.io/helm-charts" 2>/dev/null || true
 helm repo update
 
 # install/upgrade
-helm upgrade --install "$RELEASE_NAME" "$CHART_NAME" -n "$NAMESPACE" -f "$VALUES_FILE" --wait --timeout "$HELM_TIMEOUT"
-echo "Grafana release '$RELEASE_NAME' installed in namespace '$NAMESPACE'."
+helm upgrade --install crewcash-grafana grafana/grafana -n grafana -f resources/values.yml --wait --timeout 300s
+echo "Grafana release 'crewcash-grafana' installed in namespace 'grafana'."
