@@ -4,6 +4,13 @@ set -euo pipefail
 
 cd "$(dirname "$0")"
 
+if ! kubectl -n grafana get configmap grafana-dashboards >/dev/null 2>&1; then
+  kubectl -n grafana create configmap grafana-dashboards \
+    --from-file=jvm.json=./resources/jvm.json \
+    --from-file=circuit-breaker.json=./resources/circuit-breaker.json \
+    --from-file=spring-cloud-gateway.json=./resources/spring-cloud-gateway.json
+fi
+
 RELEASE_NAME="${RELEASE_NAME:-crewcash-grafana}"
 NAMESPACE="${NAMESPACE:-grafana}"
 CHART_REPO="${CHART_REPO:-https://grafana.github.io/helm-charts}"
