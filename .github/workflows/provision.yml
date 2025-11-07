@@ -1,4 +1,4 @@
-name: Terraform Deploy
+name: Terraform Provisioning
 
 on:
   push:
@@ -34,15 +34,19 @@ jobs:
           role-to-assume: arn:aws:iam::471112759337:role/github-actions-terraform-role
           aws-region: eu-central-1
 
+
       - name: Terraform Init
+        working-directory: ./terraform
         run: terraform init
 
       - name: Terraform Validate
+        working-directory: ./terraform
         run: terraform validate
 
       - name: Terraform Plan
         env:
           TF_VAR_terraform_role_arn: "arn:aws:iam::471112759337:role/github-actions-terraform-role"
+        working-directory: ./terraform
         run: terraform plan -out=tfplan
 
       # - name: Terraform Apply
