@@ -1,7 +1,7 @@
 variable "aws_region" {
   description = "AWS region to deploy the infrastructure in"
   type        = string
-  default     = "us-central-1"
+  default     = "eu-central-1"
 }
 
 variable "aws_profile" {
@@ -14,7 +14,7 @@ variable "aws_profile" {
 variable "role_arn" {
   description = "IAM role to assume (used in CI/CD)"
   type        = string
-  default     = "" # e.g. "arn:aws:iam::471112759337:role/github-actions-terraform-role"
+  default     = "arn:aws:iam::471112759337:role/terraform-manual-role"
 }
 
 # VPC variables
@@ -57,8 +57,8 @@ variable "node_groups" {
     desired_capacity = 2
     min_capacity     = 1
     max_capacity     = 3
-    instance_types   = ["t3.medium"]
-    key_name         = "my-ssh-key"   # or "" if none
+    instance_types   = ["t3.small"]
+    key_name         = ""   # or "" if none
     additional_tags  = {
       "k8s-node-role" = "managed"
       "env"           = "dev"

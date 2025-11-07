@@ -19,7 +19,8 @@ provider "aws" {
   region  = var.aws_region
 
   assume_role {
-    role_arn = "arn:aws:iam::471112759337:role/terraform-manual-role"
+    role_arn = var.role_arn
+    # role_arn = "arn:aws:iam::471112759337:role/terraform-manual-role"
     # role_arn = "arn:aws:iam::471112759337:role/github-actions-terraform-role"
   }
 }
