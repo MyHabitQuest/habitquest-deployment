@@ -54,28 +54,28 @@ variable "node_groups" {
   type = any 
   default = {
   managed_nodes = {
-    desired_capacity = 2
-    min_capacity     = 1
-    max_capacity     = 3
-    instance_types   = ["t3.small"]
-    key_name         = ""   # or "" if none
+    desired_capacity = 3
+    min_capacity     = 2
+    max_capacity     = 4
+    instance_types   = ["t3.medium"]
+    key_name         = ""
     additional_tags  = {
       "k8s-node-role" = "managed"
       "env"           = "dev"
     }
   }
 
-  spot_workers = {
-    desired_capacity = 1
-    min_capacity     = 0
-    max_capacity     = 2
-    instance_types   = ["t3.small"]
-    key_name         = ""
-    additional_tags  = {
-      "k8s-node-role" = "spot"
-      "env"           = "dev"
-    }
-  }
+#  spot_workers = {
+#    desired_capacity = 1
+#    min_capacity     = 0
+#    max_capacity     = 2
+#    instance_types   = ["t3.small"]
+#    key_name         = ""
+#    additional_tags  = {
+#      "k8s-node-role" = "spot"
+#      "env"           = "dev"
+#    }
+#  }
 }
 }
 

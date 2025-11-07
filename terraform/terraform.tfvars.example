@@ -8,7 +8,7 @@ node_groups = {
     desired_capacity = 2
     min_capacity     = 1
     max_capacity     = 3
-    instance_types   = ["t3.small"]
+    instance_types   = ["t3.medium"]
     key_name         = "my-key"
     additional_tags  = {}
   }
