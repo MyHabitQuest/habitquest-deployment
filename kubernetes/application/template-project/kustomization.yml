@@ -21,7 +21,7 @@ images:
   newTag: latest
 - name: template-project
   newName: ghcr.io/crewcash/template-project
-  newTag: 9e7e26b91db24e0cc8acb078e49b21e6aa02b9dd
+  newTag: 3acab79ba7f7b6f3eb55c987e067ebed9af2e9b2
 
 replicas:
 - count: 1
