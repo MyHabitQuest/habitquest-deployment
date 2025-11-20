@@ -2,24 +2,24 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - github.com/crewcash/budget-service/k8s?ref=main
+- github.com/crewcash/budget-service/k8s?ref=main
 
 patches:
-  - path: patch-env.yml
-  - path: patch-resources.yml
-  - path: patch-volumes.yml
+- path: patch-env.yml
+- path: patch-resources.yml
+- path: patch-volumes.yml
 
 configMapGenerator:
-  - behavior: merge
-    files:
-      - application.yml
-    name: budget-config
+- behavior: merge
+  files:
+  - application.yml
+  name: budget-config
 
 images:
-  - name: budget-service
-    newName: ghcr.io/crewcash/budget-service
-    newTag: latest
+- name: budget-service
+  newName: ghcr.io/crewcash/budget-service
+  newTag: 0ee22199a5a412424e658dcb7a9387e97e266c67
 
 replicas:
-  - count: 1
-    name: budget-service
+- count: 1
+  name: budget-service
