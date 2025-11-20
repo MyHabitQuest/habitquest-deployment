@@ -2,24 +2,24 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - github.com/crewcash/sharing-service/k8s?ref=main
+- github.com/crewcash/sharing-service/k8s?ref=main
 
-patches:  
-  - path: patch-env.yml
-  - path: patch-resources.yml
-  - path: patch-volumes.yml
+patches:
+- path: patch-env.yml
+- path: patch-resources.yml
+- path: patch-volumes.yml
 
 configMapGenerator:
-  - behavior: merge
-    files:
-      - application.yml
-    name: sharing-config
+- behavior: merge
+  files:
+  - application.yml
+  name: sharing-config
 
 images:
-  - name: sharing-service
-    newName: ghcr.io/crewcash/sharing-service
-    newTag: latest
+- name: sharing-service
+  newName: ghcr.io/crewcash/sharing-service
+  newTag: a872a233e4f79171e446a6e858d70cc9d02fed03
 
 replicas:
-  - count: 2
-    name: sharing-service
+- count: 2
+  name: sharing-service
