@@ -1,9 +1,13 @@
 name: Terraform Provisioning
 
 on:
-  push:
-    # branches: [main]
-  pull_request:
+  workflow_dispatch:
+#  workflow_run:
+#    workflows: ['Deploy']
+#    types: [completed]
+concurrency:
+  group: deploy
+  cancel-in-progress: true
 
 permissions:
   id-token: write
@@ -43,11 +47,10 @@ jobs:
         working-directory: ./terraform
         run: terraform plan -out=tfplan
 
-      # - name: Terraform Apply
-      #   if: github.ref == 'refs/heads/main'
-      #   env:
-      #     TF_VAR_terraform_role_arn: "arn:aws:iam::471112759337:role/github-actions-terraform-role"
-      #   run: terraform apply -auto-approve tfplan
+      - name: Terraform Apply
+        env:
+          TF_VAR_terraform_role_arn: "arn:aws:iam::471112759337:role/github-actions-terraform-role"
+        run: terraform apply -auto-approve tfplan
 
       - name: Install kubectl
         uses: azure/setup-kubectl@v4
