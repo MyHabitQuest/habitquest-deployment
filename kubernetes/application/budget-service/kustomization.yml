@@ -18,7 +18,7 @@ configMapGenerator:
 images:
 - name: budget-service
   newName: ghcr.io/crewcash/budget-service
-  newTag: 55711b22415bc384f750310967e9a1807e931159
+  newTag: 7fe78478c724a161ec2958fdbd41e23867106f05
 
 replicas:
 - count: 1
