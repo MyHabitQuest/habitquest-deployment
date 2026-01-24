@@ -19,7 +19,7 @@ configMapGenerator:
 images:
 - name: edge-service
   newName: ghcr.io/crewcash/edge-service
-  newTag: 800b103bfb72d6b8dae6f40e0408d6fc26c8e73f
+  newTag: 996dd8b9c991f119e79744a8f999fdac8c1fdd0a
 
 replicas:
 - count: 1
