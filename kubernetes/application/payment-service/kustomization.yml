@@ -18,7 +18,7 @@ configMapGenerator:
 images:
 - name: payment-service
   newName: ghcr.io/crewcash/payment-service
-  newTag: 17d2754c353d255e65eed8694cda704cce02b0df
+  newTag: bcd0c657d38d3bacef97b50b922216af01b0cbe7
 
 replicas:
 - count: 1
