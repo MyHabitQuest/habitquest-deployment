@@ -18,7 +18,7 @@ configMapGenerator:
 images:
 - name: sharing-service
   newName: ghcr.io/crewcash/sharing-service
-  newTag: ab4037cf1b718892019671bba2e1660c0aa6c1b7
+  newTag: b0e526ffefcbe501118caaced29b87203a8187f7
 
 replicas:
 - count: 2
