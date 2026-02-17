@@ -18,7 +18,7 @@ configMapGenerator:
 images:
 - name: notification-service
   newName: ghcr.io/crewcash/notification-service
-  newTag: d55b26df4fe9ae62767db6f0f81fab247daf602f
+  newTag: fd8e1e0577c2eb0ca59976f00a33fe16cf0d72df
 
 replicas:
 - count: 1
