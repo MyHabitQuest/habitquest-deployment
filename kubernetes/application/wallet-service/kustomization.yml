@@ -18,7 +18,7 @@ configMapGenerator:
 images:
 - name: wallet-service
   newName: ghcr.io/crewcash/wallet-service
-  newTag: 24d4ea43ab55addf9071bd29468ce0b9ecc47e9d
+  newTag: 302d9b022193793b486db08f9ef1492946dbdef9
 
 replicas:
 - count: 2
