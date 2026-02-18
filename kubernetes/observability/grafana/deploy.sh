@@ -21,5 +21,5 @@ helm repo add grafana "https://grafana.github.io/helm-charts" 2>/dev/null || tru
 helm repo update
 
 # install/upgrade
-helm upgrade --install crewcash-grafana grafana/grafana -n grafana -f resources/values.yml --wait --timeout 300s
-echo "Grafana release 'crewcash-grafana' installed in namespace 'grafana'."
+helm upgrade --install habitquest-grafana grafana/grafana -n grafana -f resources/values.yml --wait --timeout 300s
+echo "Grafana release 'habitquest-grafana' installed in namespace 'grafana'."

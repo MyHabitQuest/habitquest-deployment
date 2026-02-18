@@ -9,7 +9,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 "$SCRIPT_DIR/keycloak/deploy.sh"
 "$SCRIPT_DIR/argocd/deploy.sh"
 
-SERVICE_NAME="crewcash-keycloak"
+SERVICE_NAME="habitquest-keycloak"
 NAMESPACE="keycloak-system"
 
 echo -e "\nWaiting for Keycloak service to be ready..."
@@ -18,7 +18,7 @@ while ! kubectl get service "$SERVICE_NAME" -n "$NAMESPACE" &> /dev/null; do
 done
 
 external_ip=$(kubectl get service "$SERVICE_NAME" -n "$NAMESPACE" --no-headers -o custom-columns=":status.loadBalancer.ingress[0].ip")
-"$SCRIPT_DIR/keycloak/create-secrets.sh" "http://$external_ip/realms/CrewCash"
+"$SCRIPT_DIR/keycloak/create-secrets.sh" "http://$external_ip/realms/habitquest"
 
 echo -e "\nWaiting for ArgoCD server service to be ready..."
 while ! kubectl get service argocd-server -n argocd &> /dev/null; do
@@ -33,6 +33,6 @@ argocd_server_port=$(kubectl -n argocd get service argocd-server -o jsonpath="{.
 echo -e "\n Kubernetes cluster has been successfully initialized."
 echo -e "\n You can access the services using the following URLs:"
 echo " - Argo CD: http://$argocd_server_ip:$argocd_server_port"
-echo " - Keycloak: http://$external_ip/realms/CrewCash"
+echo " - Keycloak: http://$external_ip/realms/habitquest"
 echo " - Keycloak: http://$external_ip/admin"
 

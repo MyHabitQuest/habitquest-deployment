@@ -38,17 +38,17 @@ datasources:
     datasources:
       - name: Prometheus
         type: prometheus
-        uid: prometheus-crewcash
+        uid: prometheus-habitquest
         access: proxy
         orgId: 1
-        url: http://crewcash-prometheus-server.prometheus-system.svc.cluster.local:9090
+        url: http://habitquest-prometheus-server.prometheus-system.svc.cluster.local:9090
         basicAuth: false
         isDefault: false
         version: 1
         editable: true
       - name: Tempo
         type: tempo
-        uid: tempo-crewcash
+        uid: tempo-habitquest
         access: proxy
         orgId: 1
         url: http://tempo.prometheus-system.svc.cluster.local:3100
@@ -59,7 +59,7 @@ datasources:
         jsonData:
           httpMethod: GET
           tracesToLogs:
-            datasourceUid: "loki-crewcash"
+            datasourceUid: "loki-habitquest"
             tags: ["instance", "pod", "namespace", "hostname"]
             mappedTags:
               - key: "service.name"
@@ -71,16 +71,16 @@ datasources:
             filterBySpanID: false
             lokiSearch: true
           lokiSearch:
-            datasourceUid: "loki-crewcash"
+            datasourceUid: "loki-habitquest"
           serviceMap:
-            datasourceUid: "prometheus-crewcash"
+            datasourceUid: "prometheus-habitquest"
           search:
             hide: false
           nodeGraph:
             enabled: true
       - name: Loki
         type: loki
-        uid: loki-crewcash
+        uid: loki-habitquest
         access: proxy
         orgId: 1
         url: http://loki.logging.svc.cluster.local:3100
@@ -90,7 +90,7 @@ datasources:
         editable: true
         jsonData:
           derivedFields:
-            - datasourceUid: tempo-crewcash
+            - datasourceUid: tempo-habitquest
               matcherRegex: '\[.+,(.+?),'
               name: TraceID
               url: "$${__value.raw}"

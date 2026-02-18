@@ -8,9 +8,9 @@ terraform {
   }
 
   cloud { 
-    organization = "crewcash" 
+    organization = "habitquest" 
     workspaces { 
-      name = "crewcash-cli" 
+      name = "habitquest-cli" 
     } 
   } 
 }

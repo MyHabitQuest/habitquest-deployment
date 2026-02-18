@@ -1,7 +1,7 @@
 apiVersion: rabbitmq.com/v1beta1
 kind: RabbitmqCluster
 metadata:
-  name: crewcash-rabbitmq
+  name: habitquest-rabbitmq
   namespace: rabbitmq-system
 spec:
   replicas: 1

@@ -17,10 +17,10 @@ spec:
       volumes:
         - name: redis-credentials-volume
           secret:
-            secretName: crewcash-redis-credentials
+            secretName: habitquest-redis-credentials
         - name: keycloak-client-credentials-volume
           secret:
-            secretName: crewcash-keycloak-client-credentials
+            secretName: habitquest-keycloak-client-credentials
         - name: keycloak-issuer-client-secret-volume
           secret:
             secretName: keycloak-issuer-client-secret

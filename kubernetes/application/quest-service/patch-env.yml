@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: budget-service
+  name: quest-service
 spec:
   template:
     spec:
       containers:
-        - name: budget-service
+        - name: quest-service
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: prod

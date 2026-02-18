@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-- github.com/crewcash/sharing-service/k8s?ref=main
+- github.com/myhabitquest/quest-service/k8s?ref=main
 
 patches:
 - path: patch-env.yml
@@ -13,13 +13,13 @@ configMapGenerator:
 - behavior: merge
   files:
   - application.yml
-  name: sharing-config
+  name: quest-config
 
 images:
-- name: sharing-service
-  newName: ghcr.io/crewcash/sharing-service
+- name: quest-service
+  newName: ghcr.io/myhabitquest/quest-service
   newTag: b0e526ffefcbe501118caaced29b87203a8187f7
 
 replicas:
 - count: 2
-  name: sharing-service
+  name: quest-service

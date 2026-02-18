@@ -3,33 +3,33 @@ kind: ConfigMap
 metadata:
   name: postgres-config
   labels:
-    db: crewcash-postgres
+    db: habitquest-postgres
 data:
   init.sql: |
-    CREATE DATABASE crewcashdb_wallet;
-    CREATE DATABASE crewcashdb_budget;
-    CREATE DATABASE crewcashdb_sharing;
-    CREATE DATABASE crewcashdb_payment;
+    CREATE DATABASE habitquestdb_tracking;
+    CREATE DATABASE habitquestdb_marketplace;
+    CREATE DATABASE habitquestdb_guild;
+    CREATE DATABASE habitquestdb_quest;
 
 ---
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: crewcash-postgres
+  name: habitquest-postgres
   labels:
-    db: crewcash-postgres
+    db: habitquest-postgres
 spec:
   selector:
     matchLabels:
-      db: crewcash-postgres
+      db: habitquest-postgres
   template:
     metadata:
       labels:
-        db: crewcash-postgres
+        db: habitquest-postgres
     spec:
       containers:
-        - name: crewcash-postgres
+        - name: habitquest-postgres
           image: postgres:14.12
           env:
             - name: POSTGRES_USER
@@ -56,13 +56,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: crewcash-postgres
+  name: habitquest-postgres
   labels:
-    db: crewcash-postgres
+    db: habitquest-postgres
 spec:
   type: ClusterIP
   selector:
-    db: crewcash-postgres
+    db: habitquest-postgres
   ports:
     - protocol: TCP
       port: 5432

@@ -1,1 +1,1 @@
-kubectl -n prometheus-system port-forward svc/crewcash-prometheus-server 8080:80
+kubectl -n prometheus-system port-forward svc/habitquest-prometheus-server 8080:80

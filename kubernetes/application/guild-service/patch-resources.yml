@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: budget-service
+  name: guild-service
 spec:
   template:
     spec:
       containers:
-        - name: budget-service
+        - name: guild-service
           resources:
             requests:
               memory: 756Mi

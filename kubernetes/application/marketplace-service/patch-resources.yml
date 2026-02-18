@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: payment-service
+  name: marketplace-service
 spec:
   template:
     spec:
       containers:
-        - name: payment-service
+        - name: marketplace-service
           resources:
             requests:
               memory: 756Mi

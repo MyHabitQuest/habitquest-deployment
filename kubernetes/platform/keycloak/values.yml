@@ -1,6 +1,6 @@
-fullnameOverride: crewcash-keycloak
+fullnameOverride: habitquest-keycloak
 commonAnnotations:
-  app: crewcash-keycloak
+  app: habitquest-keycloak
 image:
   registry: public.ecr.aws
   repository: bitnami/keycloak

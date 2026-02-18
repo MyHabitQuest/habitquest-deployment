@@ -1,8 +1,8 @@
 #!/bin/sh
 
-export RABBITMQ_USERNAME=$(kubectl get secret crewcash-rabbitmq-default-user -o jsonpath='{.data.username}' --namespace=rabbitmq-system | base64 --decode)
-export RABBITMQ_PASSWORD=$(kubectl get secret crewcash-rabbitmq-default-user -o jsonpath='{.data.password}' --namespace=rabbitmq-system | base64 --decode)
-export RABBITMQ_SERVICE=$(kubectl get service crewcash-rabbitmq -o jsonpath='{.spec.clusterIP}' --namespace=rabbitmq-system)
+export RABBITMQ_USERNAME=$(kubectl get secret habitquest-rabbitmq-default-user -o jsonpath='{.data.username}' --namespace=rabbitmq-system | base64 --decode)
+export RABBITMQ_PASSWORD=$(kubectl get secret habitquest-rabbitmq-default-user -o jsonpath='{.data.password}' --namespace=rabbitmq-system | base64 --decode)
+export RABBITMQ_SERVICE=$(kubectl get service habitquest-rabbitmq -o jsonpath='{.spec.clusterIP}' --namespace=rabbitmq-system)
 
 kubectl run perf-test --image=pivotalrabbitmq/perf-test --namespace=rabbitmq-system -- --uri amqp://$RABBITMQ_USERNAME:$RABBITMQ_PASSWORD@$RABBITMQ_SERVICE
 
