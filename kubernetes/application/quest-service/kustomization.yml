@@ -18,7 +18,7 @@ configMapGenerator:
 images:
 - name: quest-service
   newName: ghcr.io/myhabitquest/quest-service
-  newTag: b0e526ffefcbe501118caaced29b87203a8187f7
+  newTag: 4f79b12e389aa9a3ae7b3147ded7094986d1e2fc
 
 replicas:
 - count: 2
