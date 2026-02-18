@@ -18,7 +18,7 @@ configMapGenerator:
 images:
 - name: guild-service
   newName: ghcr.io/myhabitquest/guild-service
-  newTag: 302d9b022193793b486db08f9ef1492946dbdef9
+  newTag: d2a2935988643bfd7e2a19f1fa7fd10e8bba1123
 
 replicas:
 - count: 2
