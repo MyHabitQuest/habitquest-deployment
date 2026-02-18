@@ -18,7 +18,7 @@ configMapGenerator:
 images:
 - name: tracking-service
   newName: ghcr.io/myhabitquest/tracking-service
-  newTag: 75fb8b475b7857d2a24ebf20d45c80b61c53c8e1
+  newTag: 51303f7bae3e7439e6bae4f4b10ea0a154fa7918
 
 replicas:
 - count: 1
