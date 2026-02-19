@@ -18,7 +18,7 @@ configMapGenerator:
 images:
 - name: notification-service
   newName: ghcr.io/myhabitquest/notification-service
-  newTag: fd8e1e0577c2eb0ca59976f00a33fe16cf0d72df
+  newTag: 1b3c7c40345167f90d4f08fb73a814f413cd1bde
 
 replicas:
 - count: 1
